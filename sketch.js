@@ -25,6 +25,30 @@ const OwinningMessage = () => `computer has won!`;
 const drawMessage = () => `Game ended in a draw`;
 const computerMoveMessage = () => `Computer is making a move...`;
 
+const addItem = (rowCount, columCount) => {
+  while (board.firstChild) {
+    board.removeChild(board.firstChild);
+  }
+  
+  for (var i = 0; i < rowCount; i++) {
+    var rowDiv = document.createElement('div')
+    rowDiv.className = "row";
+    board.appendChild(rowDiv);
+    for (var j = 0; j < columCount; j++) {
+      var cellDiv = document.createElement('div')
+      cellDiv.className = "cell";
+      cellDiv.id = i + '_' + j
+      rowDiv.appendChild(cellDiv);
+    }
+  }
+}
+
+const createGrid = () => {
+  var rows = Number(document.getElementById("rowInput").value);
+  var columns = Number(document.getElementById("columnInput").value);
+  addItem(rows, columns);
+}
+
 const checkWin = (boardState, player) => {
   return winningCombos.some(combination => {
     return combination.every(index => {
